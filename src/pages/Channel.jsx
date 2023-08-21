@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-//import { Box } from "@mui/material";
+import { Box } from "@mui/material";
+import { ChannelCard, VideoList } from "../components";
 
 //import { fetchApiData } from "../utils/fetchApiData";
 
@@ -30,10 +31,30 @@ const Channel = () => {
 
     const sample = JSON.parse(localStorage.getItem("saple"));
 
+    console.log(sample);
+
     setChannelDetail(sample[0]);
   }, [id]);
 
-  return <div></div>;
+  if (!channelDetail) return <div>Loading...</div>;
+
+  return (
+    <Box minHeight="95vh">
+      <Box>
+        <div style={{ backgroundColor: "pink", zIndex: 10, height: "300px" }}>
+          insert banner here
+        </div>
+
+        <ChannelCard channel={channelDetail} marginT="-93px" />
+      </Box>
+
+      <Box display="flex" p="2">
+        <Box sx={{ mr: { sm: "100px" } }} />
+
+        <VideoList videos={channelVideos} />
+      </Box>
+    </Box>
+  );
 };
 
 export default Channel;
