@@ -1,21 +1,31 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Box } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { Container } from "@mui/material";
+
 import { Feed, Video, Channel, Search, NotFound } from "./pages";
-import { NavBar } from "./components";
+import { FooterText, NavBar } from "./components";
+import { dark, light } from "./utils/themes";
 
 const App = () => {
-  return (
-    <Box sx={{ backgroundColor: "#000" }}>
-      <NavBar />
+  const [theme, setTheme] = useState(false);
 
-      <Routes>
-        <Route path="/" element={<Feed />} />
-        <Route path="/video/:id" element={<Video />} />
-        <Route path="/channel/:id" element={<Channel />} />
-        <Route path="/search/:keyword" element={<Search />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Box>
+  return (
+    <ThemeProvider theme={theme ? dark : light}>
+      <Container disableGutters sx={{ backgroundColor: "primary.background" }}>
+        <NavBar theme={theme} setTheme={setTheme} />
+
+        <Routes>
+          <Route path="/" element={<Feed />} />
+          <Route path="/video/:id" element={<Video />} />
+          <Route path="/channel/:id" element={<Channel />} />
+          <Route path="/search/:keyword" element={<Search />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
+        <FooterText />
+      </Container>
+    </ThemeProvider>
   );
 };
 

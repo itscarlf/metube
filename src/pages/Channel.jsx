@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { ChannelCard, VideoList } from "../components";
 
 //import { fetchApiData } from "../utils/fetchApiData";
@@ -11,20 +11,16 @@ const Channel = () => {
   const { id } = useParams();
 
   console.log(channelDetail);
-  console.log(id);
-  console.log(channelVideos);
+  // console.log(id);
+  // console.log(channelVideos);
 
   useEffect(() => {
-    // fetchApiData(`channels?&part=snippet&id=${id}`).then((data) => {
-    //   localStorage.setItem("saple", JSON.stringify(data.items));
-    //   //setChannelDetail(data.items[0]);
-    // });
+    // fetchApiData(`channels?&part=snippet&id=${id}`).then((data) =>
+    //   setChannelDetail(data.items[0])
+    // );
 
     // fetchApiData(`search?&channelId=${id}&part=snippet&order=date`).then(
-    //   (data) => {
-    //     localStorage.setItem("origami", JSON.stringify(data.items));
-    //     setChannelVideos(data.items);
-    //   }
+    //   (data) => setChannelVideos(data.items)
     // );
 
     setChannelVideos(JSON.parse(localStorage.getItem("origami")));
@@ -39,21 +35,22 @@ const Channel = () => {
   if (!channelDetail) return <div>Loading...</div>;
 
   return (
-    <Box minHeight="95vh">
-      <Box>
-        <div style={{ backgroundColor: "pink", zIndex: 10, height: "300px" }}>
-          insert banner here
-        </div>
+    <Container disableGutters sx={{ px: "10px" }}>
+      <Box
+        sx={{
+          backgroundImage: `url(${channelDetail.brandingSettings.image.bannerExternalUrl})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundColor: "gray",
+          height: "200px",
+        }}
+      />
 
-        <ChannelCard channel={channelDetail} marginT="-93px" />
-      </Box>
+      <ChannelCard channel={channelDetail} marginT="-90px" />
 
-      <Box display="flex" p="2">
-        <Box sx={{ mr: { sm: "100px" } }} />
-
-        <VideoList videos={channelVideos} />
-      </Box>
-    </Box>
+      <VideoList videos={channelVideos} />
+    </Container>
   );
 };
 

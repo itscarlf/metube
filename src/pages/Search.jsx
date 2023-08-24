@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { VideoList } from "../components";
 import { fetchApiData } from "../utils/fetchApiData";
@@ -15,16 +15,21 @@ const Search = () => {
     });
   }, [keyword]);
 
-  console.log(keyword);
-
   return (
-    <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
-      <Typography variant="h4" fontWeight="bold" mb={2} sx={{ color: "white" }}>
+    <Container disableGutters sx={{ px: "10px" }}>
+      <Typography
+        variant="h5"
+        sx={{
+          textDecoration: "underline",
+          textDecorationColor: "#de264e",
+          mb: "20px",
+        }}
+      >
         Search results for "{keyword}" videos
       </Typography>
 
       <VideoList videos={videos} />
-    </Box>
+    </Container>
   );
 };
 

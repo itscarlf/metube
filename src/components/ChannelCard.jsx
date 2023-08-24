@@ -5,49 +5,44 @@ import { CheckCircle } from "@mui/icons-material";
 import { demoProfilePicture } from "../utils/constants";
 
 const ChannelCard = ({ channel, marginT }) => {
+  console.log(channel);
+
   return (
-    <Box
-      sx={{
-        boxShadow: "none",
-        borderRadius: "20px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "326px",
-        width: { md: "320px", xs: "356px" },
-        margin: "auto",
-        marginTop: marginT,
-      }}
-    >
+    <Box>
       <Link to={`/channel/${channel.id.channelId}`}>
         <CardContent
           sx={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            textAlign: "center",
-            color: "#fff",
+            alignItems: "center",
+            mt: marginT,
           }}
         >
           <CardMedia
             image={channel.snippet.thumbnails.high.url || demoProfilePicture}
             alt={channel.snippet.title}
-            sx={{
-              borderRadius: "50%",
-              height: "180px",
-              width: "180px",
-              mb: 2,
-              border: "1px solid #e3e3e3",
-            }}
+            sx={{ width: "150px", height: "150px", borderRadius: "50%" }}
           />
 
-          <Typography variant="h6">
+          <Typography
+            variant="body1"
+            fontWeight="bold"
+            sx={{
+              color: "primary.main",
+              display: "flex",
+              alignItems: "center ",
+              mt: "7px",
+            }}
+          >
             {channel.snippet.title}
-            <CheckCircle sx={{ fontSize: 14, color: "gray", ml: "5px" }} />
+            <CheckCircle
+              sx={{ width: "17px", height: "17px", ml: "4px", color: "gray" }}
+            />
           </Typography>
 
           {channel.statistics?.subscriberCount && (
-            <Typography>
+            <Typography variant="body2" sx={{ color: "gray" }}>
               {parseInt(channel.statistics?.subscriberCount).toLocaleString()}{" "}
               Subscribers
             </Typography>

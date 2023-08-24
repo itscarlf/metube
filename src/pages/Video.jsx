@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { Typography, Box, Stack } from "@mui/material";
+import { Typography, Box, Stack, Container } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 
-import { fetchApiData } from "../utils/fetchApiData";
+//import { fetchApiData } from "../utils/fetchApiData";
 import { VideoList } from "../components";
 
 const Video = () => {
@@ -13,18 +13,26 @@ const Video = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetchApiData(`videos?&part=snippet,statistics&id=${id}`).then((data) => {
-      setVideoPlay(data.items[0]);
-    });
+    // fetchApiData(`videos?&part=snippet,statistics&id=${id}`).then((data) => {
+
+    //   setVideoPlay(data.items[0]);
+    // });
+
+    const sasma = JSON.parse(localStorage.getItem("videoPlays"));
+
+    setVideoPlay(sasma[0]);
   }, [id]);
 
   useEffect(() => {
     if (videoPlay) {
-      fetchApiData(`search?&part=snippet&q=${videoPlay.snippet.title}`).then(
-        (data) => {
-          setVideos(data.items.slice(1));
-        }
-      );
+      // fetchApiData(`search?&part=snippet&q=${videoPlay.snippet.title}`).then(
+      //   (data) => {
+
+      //     setVideos(data.items.slice(1));
+      //   }
+      // );
+
+      setVideos(JSON.parse(localStorage.getItem("videosss")));
     }
   }, [id, videoPlay]);
 
@@ -34,62 +42,72 @@ const Video = () => {
   if (!videoPlay && !videos.length) return <div>Loading...</div>;
 
   return (
-    <Box minHeight="95vh">
-      <Stack direction={{ xs: "column", md: "row" }}>
-        <Box flex={1}>
-          <Box sx={{ width: "100%", position: "sticky", top: "86px" }}>
+    <Container disableGutters sx={{ px: "10px", pt: "165px" }}>
+      <Box
+        sx={{
+          backgroundColor: "primary.video",
+          mx: "-10px",
+          mb: "10px",
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: "primary.video",
+            width: "100%",
+            position: "fixed",
+            top: "55px",
+            left: 0,
+          }}
+        >
+          <Box sx={{ position: "relative", pt: "56.25%" }}>
             <ReactPlayer
               className="react-player"
               url={`https://www.youtube.com/watch?v=${id}`}
+              width="100%"
+              height="100%"
               controls
             />
-
-            <Typography variant="h5" color="#fff" fontWeight="bold" p={2}>
-              {videoPlay.snippet.title}
-            </Typography>
-
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              sx={{ color: "#fff" }}
-              py={1}
-              px={2}
-            >
-              <Link to={`/channel/${videoPlay.snippet.channelId}`}>
-                <Typography
-                  variant={{ sm: "subtitle1", md: "h6" }}
-                  color="#fff"
-                >
-                  {videoPlay.snippet.channelTitle}
-                  <CheckCircle
-                    sx={{ fontSize: "12px", color: "gray", ml: "5px" }}
-                  />
-                </Typography>
-              </Link>
-              <Stack direction="row" gap="20px" alignItems="center">
-                <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                  {parseInt(videoPlay.statistics.viewCount).toLocaleString()}{" "}
-                  views
-                </Typography>
-                <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                  {parseInt(videoPlay.statistics.likeCount).toLocaleString()}{" "}
-                  likes
-                </Typography>
-              </Stack>
-            </Stack>
           </Box>
         </Box>
 
-        <Box
-          px={2}
-          py={{ md: 1, xs: 5 }}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <VideoList videos={videos} direction="column" />
+        <Box sx={{ p: "15px" }}>
+          <Typography
+            variant="body1"
+            fontWeight="bold"
+            fontSize="17px"
+            sx={{ mb: "5px" }}
+          >
+            {videoPlay.snippet.title}
+          </Typography>
+          <Link to={`/channel/${videoPlay.snippet.channelId}`}>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: "primary.videoChannel",
+                display: "flex",
+                alignItems: "center ",
+              }}
+            >
+              {videoPlay.snippet.channelTitle}
+              <CheckCircle
+                sx={{ width: "17px", height: "17px", ml: "4px", color: "gray" }}
+              />
+            </Typography>
+          </Link>
+
+          <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+            <Typography variant="body2" color="gray">
+              {parseInt(videoPlay.statistics.viewCount).toLocaleString()} views
+            </Typography>
+            <Typography variant="body2" color="gray">
+              {parseInt(videoPlay.statistics.likeCount).toLocaleString()} likes
+            </Typography>
+          </Stack>
         </Box>
-      </Stack>
-    </Box>
+      </Box>
+
+      <VideoList videos={videos} direction="column" />
+    </Container>
   );
 };
 

@@ -1,33 +1,48 @@
-import { Stack } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { Link } from "react-router-dom";
 
-import { logo } from "../utils/constants";
 import SearchBar from "./SearchBar";
 
-const NavBar = () => {
-  const linkStyle = {
-    display: "flex",
-    alignItems: "center",
-  };
+const NavBar = ({ theme, setTheme }) => {
+  const linkStyle = {};
 
   return (
-    <Stack
-      direction="row"
-      alignItems="center"
-      p={2}
+    <Box
+      component="header"
       sx={{
-        position: "sticky",
-        backgroundColor: "#000",
-        top: 0,
+        display: "flex",
         justifyContent: "space-between",
+        pt: "5px",
+        px: "10px",
+        mb: "10px",
+        backgroundColor: "primary.background",
+        //backgroundColor: { sm: "lightgreen", mm: "blue" },
+        position: "sticky",
+        top: 0,
+        zIndex: 5,
       }}
     >
       <Link to="/" style={linkStyle}>
-        <img src={logo} alt="logo" height={45} />
+        <img src="./logo192.png" alt="logo" width={50} height={50} />
       </Link>
 
-      <SearchBar />
-    </Stack>
+      <Stack direction="row" alignItems="center">
+        <IconButton
+          onClick={() => setTheme(!theme)}
+          sx={{ color: "primary.main", mr: "7px", mb: "3px" }}
+        >
+          {theme ? (
+            <DarkModeIcon sx={{ width: "35px", height: "35px" }} />
+          ) : (
+            <LightModeIcon sx={{ width: "35px", height: "35px" }} />
+          )}
+        </IconButton>
+
+        <SearchBar />
+      </Stack>
+    </Box>
   );
 };
 

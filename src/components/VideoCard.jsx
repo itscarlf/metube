@@ -11,26 +11,24 @@ import {
 
 const VideoCard = ({ video }) => {
   return (
-    <Card
-      sx={{
-        width: { xs: "100%", md: "320px" },
-        boxShadow: "none",
-        borderRadius: 0,
-      }}
-    >
+    <Card>
       <Link to={video.id.videoId ? `/video/${video.id.videoId}` : demoVideoUrl}>
         <CardMedia
           image={video.snippet.thumbnails.high.url}
           alt={video.snippet.title}
-          sx={{ width: { xs: "100%", sm: "358px", md: "320px" }, height: 180 }}
+          sx={{ height: "165px" }}
         />
       </Link>
 
-      <CardContent sx={{ backgroundColor: "#1e1e1e", height: "106px" }}>
+      <CardContent>
         <Link
           to={video.id.videoId ? `/video/${video.id.videoId}` : demoVideoUrl}
         >
-          <Typography variant="subtitle1" fontWeight="bold" color="#FFF">
+          <Typography
+            variant="body1"
+            fontWeight="bold"
+            sx={{ color: "primary.main" }}
+          >
             {video.snippet.title.slice(0, 50) || demoVideoTitle.slice(0, 50)}
           </Typography>
         </Link>
@@ -42,9 +40,19 @@ const VideoCard = ({ video }) => {
               : demoChannelUrl
           }
         >
-          <Typography variant="subtitle2" fontWeight="bold" color="gray">
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: "primary.channelName",
+              display: "flex",
+              alignItems: "center ",
+            }}
+          >
             {video.snippet.channelTitle || demoChannelTitle}
-            <CheckCircle sx={{ fontSize: 12, color: "gray", ml: "5px" }} />
+
+            <CheckCircle
+              sx={{ width: "15px", height: "15px", ml: "4px", color: "gray" }}
+            />
           </Typography>
         </Link>
       </CardContent>
