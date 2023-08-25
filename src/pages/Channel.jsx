@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Container } from "@mui/material";
-import { ChannelCard, VideoList } from "../components";
+import { ChannelCard, Loading, VideoList } from "../components";
 
-//import { fetchApiData } from "../utils/fetchApiData";
+import { fetchApiData } from "../utils/fetchApiData";
 
 const Channel = () => {
   const [channelDetail, setChannelDetail] = useState(null);
@@ -15,24 +15,24 @@ const Channel = () => {
   // console.log(channelVideos);
 
   useEffect(() => {
-    // fetchApiData(`channels?&part=snippet&id=${id}`).then((data) =>
-    //   setChannelDetail(data.items[0])
-    // );
+    fetchApiData(`channels?&part=snippet&id=${id}`).then((data) =>
+      setChannelDetail(data.items[0])
+    );
 
-    // fetchApiData(`search?&channelId=${id}&part=snippet&order=date`).then(
-    //   (data) => setChannelVideos(data.items)
-    // );
+    fetchApiData(`search?&channelId=${id}&part=snippet&order=date`).then(
+      (data) => setChannelVideos(data.items)
+    );
 
-    setChannelVideos(JSON.parse(localStorage.getItem("origami")));
+    // setChannelVideos(JSON.parse(localStorage.getItem("origami")));
 
-    const sample = JSON.parse(localStorage.getItem("saple"));
+    // const sample = JSON.parse(localStorage.getItem("saple"));
 
-    console.log(sample);
+    // console.log(sample);
 
-    setChannelDetail(sample[0]);
+    // setChannelDetail(sample[0]);
   }, [id]);
 
-  if (!channelDetail) return <div>Loading...</div>;
+  if (!channelDetail) return <Loading />;
 
   return (
     <Container disableGutters sx={{ px: "10px" }}>

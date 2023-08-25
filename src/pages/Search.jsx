@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { VideoList } from "../components";
+import { Loading, VideoList } from "../components";
 import { fetchApiData } from "../utils/fetchApiData";
 
 const Search = () => {
@@ -14,6 +14,8 @@ const Search = () => {
       setVideos(data.items);
     });
   }, [keyword]);
+
+  if (!videos.length) return <Loading />;
 
   return (
     <Container disableGutters sx={{ px: "10px" }}>

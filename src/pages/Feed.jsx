@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
 import { Container, Typography } from "@mui/material";
-import { SideBar, VideoList } from "../components";
-//import { fetchApiData } from "../utils/fetchApiData";
+import { Loading, SideBar, VideoList } from "../components";
+import { fetchApiData } from "../utils/fetchApiData";
 
 const Feed = () => {
   const [selectedCat, setSelectedCat] = useState("New");
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    // fetchApiData(`search?&part=snippet&q=${selectedCat}`).then((data) => {
-    //   localStorage.setItem("popularRecipes", JSON.stringify(data.items));
+    fetchApiData(`search?&part=snippet&q=${selectedCat}`).then((data) =>
+      setVideos(data.items)
+    );
 
-    //   setVideos(data.items);
-    // });
-
-    setVideos(JSON.parse(localStorage.getItem("popularRecipes")));
+    //setVideos(JSON.parse(localStorage.getItem("popularRecipes")));
   }, [selectedCat]);
+
+  console.log(videos.length);
+
+  if (!videos.length) return <Loading />;
 
   return (
     <Container disableGutters sx={{ px: "10px" }}>

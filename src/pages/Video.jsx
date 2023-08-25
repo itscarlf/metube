@@ -4,8 +4,8 @@ import ReactPlayer from "react-player";
 import { Typography, Box, Stack, Container } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 
-//import { fetchApiData } from "../utils/fetchApiData";
-import { VideoList } from "../components";
+import { fetchApiData } from "../utils/fetchApiData";
+import { Loading, VideoList } from "../components";
 
 const Video = () => {
   const [videoPlay, setVideoPlay] = useState(null);
@@ -13,33 +13,31 @@ const Video = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // fetchApiData(`videos?&part=snippet,statistics&id=${id}`).then((data) => {
+    fetchApiData(`videos?&part=snippet,statistics&id=${id}`).then((data) => {
+      setVideoPlay(data.items[0]);
+    });
 
-    //   setVideoPlay(data.items[0]);
-    // });
+    //const sasma = JSON.parse(localStorage.getItem("videoPlays"));
 
-    const sasma = JSON.parse(localStorage.getItem("videoPlays"));
-
-    setVideoPlay(sasma[0]);
+    //setVideoPlay(sasma[0]);
   }, [id]);
 
   useEffect(() => {
     if (videoPlay) {
-      // fetchApiData(`search?&part=snippet&q=${videoPlay.snippet.title}`).then(
-      //   (data) => {
+      fetchApiData(`search?&part=snippet&q=${videoPlay.snippet.title}`).then(
+        (data) => {
+          setVideos(data.items.slice(1));
+        }
+      );
 
-      //     setVideos(data.items.slice(1));
-      //   }
-      // );
-
-      setVideos(JSON.parse(localStorage.getItem("videosss")));
+      // setVideos(JSON.parse(localStorage.getItem("videosss")));
     }
   }, [id, videoPlay]);
 
   // console.log(videoPlay);
   // console.log(videos);
 
-  if (!videoPlay && !videos.length) return <div>Loading...</div>;
+  if (!videoPlay) return <Loading />;
 
   return (
     <Container disableGutters sx={{ px: "10px", pt: "165px" }}>
