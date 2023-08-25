@@ -23,11 +23,11 @@ const SideBar = ({ selectedCat, setSelectedCat }) => {
             backgroundColor:
               category.name === selectedCat
                 ? "rgb(251, 3, 7)"
-                : "primary.faded",
+                : "primary.catBg",
             background:
               category.name === selectedCat
                 ? "linear-gradient(180deg,rgba(251, 3, 7, 1) 0%,rgba(255, 41, 106, 1) 79%)"
-                : "primary.faded",
+                : "primary.catBg",
           }}
         >
           <span>{category.name}</span>

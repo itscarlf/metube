@@ -6,8 +6,9 @@ export const light = createTheme({
     primary: {
       main: grey[900],
       background: "#fff",
-      faded: grey[100],
+      catBg: grey[100],
       bright: "#fb0307",
+      videoCardBg: "#fff",
       channelName: grey[500],
       video: grey[300],
       videoChannel: grey[800],
@@ -32,8 +33,12 @@ export const dark = createTheme({
     primary: {
       main: "#fff",
       background: grey[900],
-      faded: grey[100],
+      catBg: grey[800],
       bright: "#fb0307",
+      videoCardBg: grey[800],
+      channelName: grey[500],
+      video: grey[800],
+      videoChannel: grey[500],
     },
   },
 

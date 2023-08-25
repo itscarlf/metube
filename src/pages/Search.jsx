@@ -21,6 +21,7 @@ const Search = () => {
     <Container disableGutters sx={{ px: "10px" }}>
       <Typography
         variant="h5"
+        color="primary.main"
         sx={{
           textDecoration: "underline",
           textDecorationColor: "#de264e",

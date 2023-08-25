@@ -20,7 +20,7 @@ const VideoCard = ({ video }) => {
         />
       </Link>
 
-      <CardContent>
+      <CardContent sx={{ backgroundColor: "primary.videoCardBg" }}>
         <Link
           to={video.id.videoId ? `/video/${video.id.videoId}` : demoVideoUrl}
         >

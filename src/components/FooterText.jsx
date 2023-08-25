@@ -11,7 +11,7 @@ const FooterText = () => {
         borderTop: "1px solid #ccc",
       }}
     >
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="body2" color="primary.videoChannel">
         Copyright &copy; 2023 MeTube
       </Typography>
     </Box>

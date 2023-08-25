@@ -27,8 +27,6 @@ const Channel = () => {
 
     // const sample = JSON.parse(localStorage.getItem("saple"));
 
-    // console.log(sample);
-
     // setChannelDetail(sample[0]);
   }, [id]);
 

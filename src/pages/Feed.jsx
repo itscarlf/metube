@@ -25,6 +25,7 @@ const Feed = () => {
 
       <Typography
         variant="h5"
+        color="primary.main"
         gutterBottom
         sx={{
           textDecoration: "underline",

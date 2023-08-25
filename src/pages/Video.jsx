@@ -73,6 +73,7 @@ const Video = () => {
             variant="body1"
             fontWeight="bold"
             fontSize="17px"
+            color="primary.main"
             sx={{ mb: "5px" }}
           >
             {videoPlay.snippet.title}
