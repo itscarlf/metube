@@ -18,7 +18,10 @@ const Search = () => {
   if (!videos.length) return <Loading />;
 
   return (
-    <Container disableGutters sx={{ px: "10px" }}>
+    <Container
+      disableGutters
+      sx={{ px: { sm: "10px", mm: "40px", lm: "60px" } }}
+    >
       <Typography
         variant="h5"
         color="primary.main"

@@ -20,7 +20,12 @@ const Feed = () => {
   if (!videos.length) return <Loading />;
 
   return (
-    <Container disableGutters sx={{ px: "10px" }}>
+    <Container
+      disableGutters
+      sx={{
+        px: { sm: "10px", mm: "40px", lm: "60px" },
+      }}
+    >
       <SideBar selectedCat={selectedCat} setSelectedCat={setSelectedCat} />
 
       <Typography

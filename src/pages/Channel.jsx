@@ -33,7 +33,10 @@ const Channel = () => {
   if (!channelDetail) return <Loading />;
 
   return (
-    <Container disableGutters sx={{ px: "10px" }}>
+    <Container
+      disableGutters
+      sx={{ px: { sm: "10px", mm: "40px", lm: "60px" } }}
+    >
       <Box
         sx={{
           backgroundImage: `url(${channelDetail.brandingSettings.image.bannerExternalUrl})`,

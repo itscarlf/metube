@@ -40,31 +40,33 @@ const Video = () => {
   if (!videoPlay) return <Loading />;
 
   return (
-    <Container disableGutters sx={{ px: "10px", pt: "165px" }}>
+    <Container disableGutters sx={{ px: "10px" }}>
       <Box
         sx={{
           backgroundColor: "primary.video",
           mx: "-10px",
-          mb: "10px",
+          mb: { sm: "10px", mm: "30px" },
         }}
       >
-        <Box
-          sx={{
-            backgroundColor: "primary.video",
-            width: "100%",
-            position: "fixed",
-            top: "55px",
-            left: 0,
-          }}
-        >
-          <Box sx={{ position: "relative", pt: "56.25%" }}>
-            <ReactPlayer
-              className="react-player"
-              url={`https://www.youtube.com/watch?v=${id}`}
-              width="100%"
-              height="100%"
-              controls
-            />
+        <Box sx={{ height: "52vw" }}>
+          <Box
+            sx={{
+              backgroundColor: "primary.video",
+              width: "100%",
+              position: "fixed",
+              top: "55px",
+              left: 0,
+            }}
+          >
+            <Box sx={{ position: "relative", pt: "56.25%" }}>
+              <ReactPlayer
+                className="react-player"
+                url={`https://www.youtube.com/watch?v=${id}`}
+                width="100%"
+                height="100%"
+                controls
+              />
+            </Box>
           </Box>
         </Box>
 
@@ -105,7 +107,7 @@ const Video = () => {
         </Box>
       </Box>
 
-      <VideoList videos={videos} direction="column" />
+      <VideoList videos={videos} from="video" direction="column" />
     </Container>
   );
 };

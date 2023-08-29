@@ -9,6 +9,7 @@ const SideBar = ({ selectedCat, setSelectedCat }) => {
       sx={{
         overflowY: "auto",
         mb: "15px",
+        mx: { sm: "0", mm: "-30px", lm: "-50px" },
       }}
     >
       {categories.map((category) => (
